@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Epunda+Slab&display=swap');
+
+.navbar{
+    width: 100%;
+    overflow: hidden;
+}
+.info-box{
+    display: flex;
+    justify-content: center;
+    padding: 5px 20px;
+    word-spacing: 0.5px;
+    font-style: italic;
+    background-color: #0e3155;
+    color: white;
+
+}
+.nav-list{
+    background-color: white;
+    padding: 10px 20px;
+    display:inline-block;
+    width: 100%;
+}
+
+.nav-list .logo{
+    margin-right: 15px;
+    display:inline-block;
+    float: left;
+    font-size: 30px;
+    font-weight:lighter;
+    color: #02070c;
+
+}
+.nav-list .logo a{
+              text-decoration: none;
+
+}
+
+ .nav-items ul {     
+        margin-right: 20px;       
+}
+
+.nav-items ul li{
+         display: inline-block;
+    align-items: center;
+    list-style: none;
+    font-family:'Epunda Slab', serif;
+    margin-right: 30px;     
+      font-style: italic;
+      margin-left: 10px;
+      border-radius: 35%;
+          cursor: pointer;
+          text-decoration: none;
+          transition: all 0.3s ease;
+
+    }
+    .nav-items ul li a {
+  text-decoration: none; 
+  color: inherit; 
+}
+    .nav-items ul li:hover{
+    border:2px solid transparent;
+    border-width: 10px;
+    color:black;
+    background-color: rgb(195, 195, 218);
+}
+    
+
+@media (max-width: 768px) {
+    .nav-items ul li{
+        display: block;
+        margin: 10px 0;
+    }
+    .nav-list .logo{
+        float: none;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+}
