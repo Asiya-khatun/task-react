@@ -1,0 +1,25 @@
+.main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+  background: #fff;
+  z-index: 2000;
+  transition: transform 0.4s cubic-bezier(.77,0,.175,1);
+  transform: translateX(0);
+  pointer-events: none;
+  opacity: 0;
+  overflow-y: scroll;
+}
+
+.main.show {
+  transform: translateX(0);
+  pointer-events: auto;
+  opacity: 1;
+}
+.main:not(.show) {
+  transform: translateX(100vw);
+  opacity: 0;
+  pointer-events: none;
+}

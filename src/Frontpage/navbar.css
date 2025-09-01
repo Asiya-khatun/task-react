@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Epunda+Slab&display=swap');
 
-.navbar{
+.navbar {
     width: 100%;
     overflow: hidden;
 }
-.info-box{
+
+.info-box {
     display: flex;
     justify-content: center;
     padding: 5px 20px;
@@ -12,67 +13,143 @@
     font-style: italic;
     background-color: #0e3155;
     color: white;
-
 }
-.nav-list{
+
+.nav-list {
     background-color: white;
     padding: 10px 20px;
-    display:inline-block;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     width: 100%;
 }
 
-.nav-list .logo{
-    margin-right: 15px;
-    display:inline-block;
-    float: left;
+.logo {
     font-size: 30px;
-    font-weight:lighter;
+    font-weight: lighter;
     color: #02070c;
 
 }
-.nav-list .logo a{
-              text-decoration: none;
+
+.nav-list .logo a {
+    text-decoration: none;
 
 }
 
- .nav-items ul {     
-        margin-right: 20px;       
+.nav-items ul {
+    margin-right: 40px;
+    display: flex;
 }
 
-.nav-items ul li{
-         display: inline-block;
+.nav-items ul li {
+    margin: 0 20PX;
+
+    display: inline-block;
     align-items: center;
     list-style: none;
-    font-family:'Epunda Slab', serif;
-    margin-right: 30px;     
-      font-style: italic;
-      margin-left: 10px;
-      border-radius: 35%;
-          cursor: pointer;
-          text-decoration: none;
-          transition: all 0.3s ease;
+    font-family: 'Epunda Slab', serif;
+    margin-right: 30px;
+    font-style: italic;
 
-    }
-    .nav-items ul li a {
-  text-decoration: none; 
-  color: inherit; 
+    border-radius: 35%;
+    cursor: pointer;
+    text-decoration: none;
+
 }
-    .nav-items ul li:hover{
-    border:2px solid transparent;
+
+.nav-items ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-items ul li:hover {
+    border: 2px solid transparent;
     border-width: 10px;
-    color:black;
+    color: black;
     background-color: rgb(195, 195, 218);
 }
-    
+
+/* for mobile view when hamburger is clicked */
+.hamburger {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+@media(max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-items {
+        display: none;
+        width: 100%;
+    }
+
+    .nav-items.open {
+        display: block;
+    }
+
+    .nav-items ul {
+        flex-direction: column;
+
+    }
+
+    .nav-items ul li {
+        margin: 10px 0;
+
+    }
+
+    .nav-list {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+}
 
 @media (max-width: 768px) {
-    .nav-items ul li{
+    .info-box {
+        display: none;
+    }
+
+    .nav-list {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+    }
+
+    .nav-items ul li {
         display: block;
         margin: 10px 0;
     }
-    .nav-list .logo{
-        float: none;
-        text-align: center;
+
+    .nav-list .logo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-sizing: border-box;
         margin-bottom: 10px;
     }
+
+    .nav-list .logo a {
+        display: flex;
+        float: left;
+    }
+
+    .nav-list .logo .hamburger {
+        display: flex;
+        float: right;
+    }
+
+    .nav-items ul {
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-items {
+        margin-top: 1rem;
+        left: 0;
+
+    }
+
 }

@@ -147,16 +147,32 @@ color: rgb(78, 78, 200);
     font-weight: lighter;
     margin-top: 5px;
 }
-
-@media(max-width: 900px){
-    .image-box {
-        flex: 1 1 calc(50% - 20px); 
+@media (max-width: 768px) {
+    .playboxes-container {
+        flex-direction: column;
+        padding: 10px;
     }
-}
-
-@media(max-width: 500px){
+    .playbox-left, .playbox-center, .playbox-right {
+        flex: none;
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+    .playbox-left {
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+    .playbox-center ul {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    .image-container {
+        flex-direction: column;
+        align-items: center;
+    }
     .image-box {
-        flex: 1 1 100%;
+        flex: none;
+        width: 80%; 
+        margin-bottom: 20px;
     }
 }
 

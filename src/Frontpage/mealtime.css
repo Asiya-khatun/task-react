@@ -66,3 +66,22 @@
    font-weight: lighter;
    align-items: center;
 }
+
+@media (max-width: 768px) {
+    .body-container {
+        flex-direction: column;
+        padding: 10px;
+    }
+    .left-body, .right-body {
+        flex: none;
+        width: 100%;
+        margin: 0;
+    }
+    .image-item img {
+        width: 100%;
+        height: auto;
+    }
+    .image-list {
+        justify-content: center;
+    }
+}

@@ -1,32 +1,31 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import Navbar from './Frontpage/Navbar'
 import './App.css'
-import Mealtime from './Frontpage/Mealtime'
-import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
-import Playbox from './Frontpage/Playboxes'
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { Routes, Route, useLocation} from 'react-router-dom';
+import Navbar from './Frontpage/Navbar'
+import Mealtime from './Frontpage/Mealtime'
+import Playbox from './Frontpage/Playboxes'
 
 
 function App() {
+  const location = useLocation();
+  const isMain = location.pathname !== '/';
 
   return (
-          <Router>
-    <div className='header'>
+    <>
+      <div className='header'>
         <Navbar />
-        </div>
-      
-
-    <div className='main'>
-      <Routes>
-        <Route path='/mealtime' element={<Mealtime />} />
-        <Route path='/playboxes' element={<Playbox/>}></Route>
-      </Routes>
-</div>
-
-   
-      </Router>
+      </div>
+      <div className={`main${isMain ? 'show' : ''}`}>
+        <Routes>
+          <Route path='/' element={<div className='mainpage'>This is Main Page</div>} />
+          <Route path='/mealtime' element={<Mealtime />} />
+          <Route path='/playboxes' element={<Playbox />}></Route>
+        </Routes>
+      </div>
+    </>
   );
 }
 

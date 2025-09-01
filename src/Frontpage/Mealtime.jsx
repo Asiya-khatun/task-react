@@ -1,12 +1,21 @@
 import React from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 import './mealtime.css';
 
 
+
 function Mealtime() {
+   const navigate = useNavigate();
+
+  const handleBack = () => {
+    setNavbarOpen(true);
+    setTimeout(() => navigate("/"), 400);
+  };
   return (
     <div className="body">
       <div className="body-container ">
         <div className="left-body ">
+          <span className='back-arrow' onClick={handleBack}>&#60;</span>
           <h1>Shop Mealtime</h1>
           <ul>
             <li>High Chair</li>
