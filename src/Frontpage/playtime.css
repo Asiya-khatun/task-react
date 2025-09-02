@@ -1,0 +1,106 @@
+.playtime-container {
+    background-color: white;
+    padding: 20px;
+    width: 100%;
+    min-height: 70vh;
+    display: flex;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.left-playtime {
+    flex: 2;
+}
+.left-playtime .image-box {
+    width: 100%;
+}
+
+.left-playtime .image-box img {
+    width: 100%;
+    height: 50vh;
+    border-radius: 16px;
+    object-fit: cover;
+    background: #f7f7fa;
+}
+
+.right-playtime {
+    flex: 2.5;
+    text-align: left;
+    font-style: italic;
+    margin-top: 10px;
+    padding: 10px;
+    min-width: 320px;
+}
+
+.accordion-list {
+    margin: 16px 0;
+}
+
+.accordion-item {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    text-align: left;
+    font-size: 1.08rem;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    color: #b7b7b7;
+    font-style: normal;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.accordion-item:hover {
+    color: #1976d2;
+}
+
+.accordion-footer {
+    margin-top: 24px;
+}
+
+@media (max-width: 900px) {
+  .playtime-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 24px;
+    padding: 10px;
+  }
+
+  .left-playtime,
+  .right-playtime {
+    flex: none;
+    width: 100%;
+    min-width: unset;
+    margin-top: 0;
+    padding: 0;
+  }
+
+  .left-playtime .image-box img {
+    width: 100%;     
+    height: 30vh;     
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .left-playtime video {
+    width: 100%;      
+    height: auto;     
+    border-radius: 12px;
+    margin-top: 12px;
+  }
+
+  .right-playtime h2 {
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
+  .right-playtime .accordion-list .accordion-item {
+    font-size: 1rem;
+    padding: 6px 0;
+  }
+
+  .right-playtime .accordion-footer span {
+    font-size: 0.9rem;
+  }
+}

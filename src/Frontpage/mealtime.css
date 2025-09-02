@@ -1,86 +1,97 @@
-.body{
+.body {
     background-color: #f5f5f5;
 }
-.body-container{
+
+.body-container {
     width: 100%;
     margin: 20px auto;
     padding: 20px;
     background-color: rgb(251, 251, 251);
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     display: flex;
-    gap:200px;
+
 }
-.left-body h1{
+
+.left-body h1 {
     font-size: 25px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: rgb(10, 10, 17);
     font-style: italic;
 }
 
-.left-body{
-   flex:1.7;
-   padding: 10px;
+.left-body {
+    flex: 1.7;
+    padding: 10px;
 }
 
 
 
-.left-body ul{
+.left-body ul {
     list-style: none;
 }
 
-.left-body ul li{
+.left-body ul li {
     padding: 10px;
     cursor: pointer;
     font-style: italic;
 }
 
 
-.right-body{
-   flex:3.5;
-   margin-top: 25px;
+.right-body {
+    flex: 3.5;
+    margin-top: 25px;
+    margin-left: 50px;
 }
 
-.right-body h2{
+.right-body h2 {
     font-size: 15px;
     margin-bottom: 10px;
     font-style: italic;
 }
 
-.image-list{
-    display:flex;
+.image-list {
+    display: flex;
     flex-wrap: wrap;
-    gap:20px;
+    gap: 20px;
 }
-.image-item{
+
+.image-item {
     width: 150px;
     text-align: center;
 }
-.image-item img{
+
+.image-item img {
     width: 25vh;
     height: 45vh;
     border-radius: 8px;
 }
-.image-list h5{
-   font-style: italic ;
-   font-weight: lighter;
-   align-items: center;
+
+.image-list h5 {
+    font-style: italic;
+    font-weight: lighter;
+    align-items: center;
 }
 
+/* for mobile view */
 @media (max-width: 768px) {
     .body-container {
         flex-direction: column;
         padding: 10px;
     }
-    .left-body, .right-body {
+
+    .left-body,
+    .right-body {
         flex: none;
         width: 100%;
         margin: 0;
     }
+
     .image-item img {
         width: 100%;
         height: auto;
     }
+
     .image-list {
         justify-content: center;
     }

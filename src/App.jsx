@@ -7,6 +7,7 @@ import { Routes, Route, useLocation} from 'react-router-dom';
 import Navbar from './Frontpage/Navbar'
 import Mealtime from './Frontpage/Mealtime'
 import Playbox from './Frontpage/Playboxes'
+import Playtime from './Frontpage/Playtime';
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path='/' element={<div className='mainpage'>This is Main Page</div>} />
           <Route path='/mealtime' element={<Mealtime />} />
           <Route path='/playboxes' element={<Playbox />}></Route>
+          <Route path='/playtime' element={<Playtime/>}></Route>
         </Routes>
       </div>
     </>
