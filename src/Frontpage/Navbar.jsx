@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import './navbar.css';
 import { Link } from 'react-router-dom';
+import Mealtime from './Mealtime';
+import Playbox from './Playboxes';
+ 
 
 function Navbar() {
   const [showAnnouncement, setShowAnnouncement] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  // Track which item is hovered: null | 'mealtime' | 'playboxes'
+  const [hoveredMenu, setHoveredMenu] = useState(null);
 
   const handleLinkClick = () => {
-    if (window.innerWidth < 768) {
-      setMenuOpen(false);
-    }
+    setMenuOpen(false);
   };
 
   return (
@@ -29,12 +32,57 @@ function Navbar() {
           </div>
         </div>
 
-        <div className="menu desktop" style={{justifyContent:'flex-end'}}>
+        <div className="menu desktop" style={{ justifyContent: 'flex-end' }}>
           <ul>
-            <li><Link to="/mealtime" onClick={handleLinkClick}>Mealtime</Link></li>
+            <li
+              onMouseEnter={() => setHoveredMenu('mealtime')}
+              onMouseLeave={() => setHoveredMenu(null)}
+              style={{ position: 'relative' }}
+            >
+              Mealtime
+              {hoveredMenu === 'mealtime' && (
+                <div
+                  className="dropdown"
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    zIndex: 1000,
+                    background: '#fff',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+                  }}
+                >
+                  <Mealtime />
+                </div>
+              )}
+            </li>
+
             <li><Link to="/playtime" onClick={handleLinkClick}>Playtime</Link></li>
             <li>Bathtime</li>
-            <li><Link to="/playboxes">The Play Boxes</Link></li>
+
+            <li
+              onMouseEnter={() => setHoveredMenu('playboxes')}
+              onMouseLeave={() => setHoveredMenu(null)}
+              style={{ position: 'relative' }}
+            >
+              Playboxes
+              {hoveredMenu === 'playboxes' && (
+                <div
+                  className="dropdown"
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    zIndex: 1000,
+                    background: '#fff',
+                    boxShadow: '0 8px 24px rgba(27, 11, 11, 0.12)',
+                  }}
+                >
+                  <Playbox />
+                </div>
+              )}
+            </li>
+
             <li>Gifts</li>
             <li>Best Sellers</li>
           </ul>
@@ -59,7 +107,7 @@ function Navbar() {
               <li><Link to="/mealtime" onClick={handleLinkClick}>Mealtime <span className="arrow">&rarr;</span></Link></li>
               <li><Link to="/playtime" onClick={handleLinkClick}>Playtime <span className="arrow">&rarr;</span></Link></li>
               <li>Bathtime <span className="arrow">&rarr;</span></li>
-              <li><Link to="/playboxes">The Play Boxes <span className="arrow">&rarr;</span></Link></li>
+              <li><Link to="/playboxes" onClick={handleLinkClick}>The Play Boxes <span className="arrow">&rarr;</span></Link></li>
               <li>Gifts <span className="arrow">&rarr;</span></li>
               <li>Best Sellers <span className="arrow">&rarr;</span></li>
               <li>Shop all <span className="arrow">&rarr;</span></li>

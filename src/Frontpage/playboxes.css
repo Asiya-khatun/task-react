@@ -1,197 +1,221 @@
 .playboxes-container {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 32px;
+  width: 100%;
   background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
+    transform: translateX(-30%); 
+
+  padding: 20px 0;
 }
 
-.playbox-left {
-  flex: 1.1;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 0 24px 0 0;
+.playboxes-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+
+  display: grid;
+  grid-template-columns: 300px 1fr 360px;
+  gap: 40px;
+  align-items: start;
 }
 
 .playbox-left h3 {
-  font-size: 2rem;
-  font-weight: 700;
+  margin: 0 0 12px 0;
+  font: 800 1.45rem/1.2 Inter, system-ui, Arial, sans-serif;
   color: #1a2a4a;
-  margin-bottom: 18px;
-  line-height: 1.1;
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
 
-.playbox-left ul {
+.playbox-left-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.playbox-left ul li {
-  font-size: 1.08rem;
-  color: #1a2a4a;
-  padding: 8px 0;
-  cursor: pointer;
-  transition: color 0.2s;
-  font-family: 'Inter', Arial, Helvetica, sans-serif;
-  font-weight: 400;
+.playbox-left-list li {
   display: flex;
   align-items: center;
-  gap: 8px;
+  color: #1a2a4a;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color .2s;
+  padding: 4px 0;
 }
 
-.playbox-left ul li:hover {
-  color: #1976d2;
+.playbox-left-list li:hover {
+  color: #0d5bd6;
   text-decoration: underline;
 }
 
-.playbox-left ul li:last-child {
-  color: #1976d2;
+.playbox-left-list .accent-link {
+  color: #0d5bd6;
+  font-weight: 600;
   text-decoration: underline;
-  font-size: 1rem;
-  margin-top: 8px;
+}
+
+.playbox-left-list .has-sparkle::after {
+  margin-left: 6px;
+  font-size: 0.95em;
 }
 
 .playbox-center {
-  flex: 1.3;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 0 24px;
+  gap: 16px;
 }
 
-.year-buttons {
-  display: flex;
+.year-switch {
+  display: inline-flex;
   gap: 18px;
-  margin-bottom: 24px;
+  margin: 0 0 6px 0;
+  border-bottom: 1px solid #e6ecf5;
 }
 
-.year-buttons button {
+.year-switch button {
   background: none;
   border: none;
-  color: #1976d2;
-  font-weight: 600;
-  font-size: 1.08rem;
+  padding: 8px 0 10px;
+  margin-bottom: -1px;
+  font: 600 .98rem/1.2 Inter, system-ui, Arial, sans-serif;
+  color: #6b778c;
   cursor: pointer;
-  padding: 0;
-  border-bottom: 2px solid transparent;
-  transition: border 0.2s, color 0.2s;
+  position: relative;
 }
 
-.year-buttons button.active,
-.year-buttons button:focus {
-  border-bottom: 2px solid #1976d2;
-  color: #1976d2;
-  outline: none;
-}
-
-.year-list ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 28px 20px;
-  padding: 0;
-  margin: 0;
-}
-
-.year-list li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  font-size: 1rem;
+.year-switch button.active {
   color: #1a2a4a;
-  cursor: pointer;
-  min-width: 100px;
 }
 
-.year-list li svg {
-  display: block;
-  margin-bottom: 4px;
+.year-switch button.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: #3f6ee6;
+  border-radius: 2px;
+}
+
+.age-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(150px, 1fr));
+  gap: 18px 28px;
+}
+
+.age-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #22324d;
+  font: italic 500 .98rem/1.2 Inter, system-ui, Arial, sans-serif;
+}
+
+.age-icon-wrap {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 0 0 1px #eee;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 0 3px #f4f6fb inset;
 }
 
-.year-list li span {
-  font-size: 1.1rem;
-  color: #2a3556;
-  font-style: italic;
-  margin-top: 2px;
+.age-card svg {
+  width: 28px;
+  height: 28px;
 }
 
-.playbox-right {
-  flex: 1;
-  padding-left: 16px;
+.age-placeholder {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #e9eef6;
 }
 
 .playbox-right h5 {
-  font-size: 1.08rem;
-  font-weight: 600;
+  margin: 2px 0 16px 0;
   color: #1a2a4a;
-  font-style: italic;
-  margin-bottom: 18px;
+  font: 700 1.1rem/1.2 Inter, system-ui, Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.image-container {
-  display: flex;
-  gap: 18px;
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
 }
 
-.image-box {
-  background: #f7f9fa;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 160px;
-}
-
-.image-box img {
-  width: 100%;
-  height: 100px;
-  object-fit: cover;
+.card {
   border-radius: 8px;
-  margin-bottom: 10px;
+  overflow: hidden;
+  background: #f6f8fb;
+  box-shadow: 0 1px 4px rgba(16, 29, 61, 0.06);
 }
 
-.image-info h4 {
-  margin: 0;
-  font-size: 1rem;
+.card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.card .meta {
+  padding: 10px 12px;
+}
+
+.card .badge {
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  font-size: 0.72rem;
+  color: #9aa4b2;
+  margin-bottom: 4px;
+}
+
+.card h4 {
+  margin: 0 0 4px 0;
+  color: #244a8f;
+  font: 600 1rem/1.2 Inter, system-ui, Arial, sans-serif;
+}
+
+.card .price {
+  color: #3f6ee6;
   font-weight: 600;
-  color: #1a2a4a;
-  text-transform: none;
-  letter-spacing: 0;
-}
-
-.image-info h5 {
-  margin: 4px 0 0;
   font-size: 0.95rem;
-  color: #1976d2;
-  font-weight: 500;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-  .playboxes-container {
-    flex-direction: column;
+@media (max-width: 980px) {
+  .playboxes-inner {
+    grid-template-columns: 1fr;
     gap: 24px;
-    padding: 16px;
   }
-  .playbox-left, .playbox-center, .playbox-right {
-    flex: none;
-    width: 100%;
-    padding: 0;
+
+  .cards {
+    grid-template-columns: 1fr 1fr;
   }
-  .image-container {
+
+  .age-grid {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .age-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .year-switch {
     gap: 12px;
+  }
+  
+  .year-switch button {
+    font-size: 0.9rem;
   }
 }

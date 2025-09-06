@@ -1,180 +1,183 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import './playtime.css';
 
 const slides = [
   {
     image: '/icecream.png',
-    videos: [
-      { src: '/video1.mp4', poster: '/poster1.jpg' },
-      { src: '/video2.mp4', poster: '/poster2.jpg' }
-    ],
-    vimeos: [
-      { src: 'https://player.vimeo.com/video/76979871' },
-      { src: 'https://player.vimeo.com/video/357274789' }
-    ],
     accordion: {
-      title: `It's not magic. It's science`,
-      description:
-        'Lorem Ipsum Lorem ipsum dolor sit amet consectetur. Elit non ultricies sed ipsum dictum erat ut eu tempor erat. Duis feugiat dictum egestas erat.',
-      items: ['Lorem ipsum dolor', 'Amet consectetur', 'Tellus bibendum sapien'],
-      footertitle: 'A friendly translator',
-      footerdescription:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus.',
+      title: "It's not magic. It's science",
     },
   },
   {
-    image: '/icecream',
-    videos: [
-      { src: '/video.mp4', poster: '/abcimage.jpg' },
-      { src: '/video.mp4', poster: '/abcimage.jpg' }
-    ],
-    vimeos: [
-      { src: 'https://player.vimeo.com/video/76979871' },
-      { src: 'https://player.vimeo.com/video/76979871' }
-    ],
+    videos: [{ src: '/video1.mp4', poster: '/poster1.jpg' }],
     accordion: {
-      title: `Another Slide Title`,
+      title: 'Lorem Ipsum',
       description:
-        'Another slide description goes here. Duis feugiat dictum egestas erat.',
-      items: ['First item', 'Second item', 'Third item'],
-      footertitle: 'Another friendly note',
-      footerdescription:
-        'Another footer description for this slide.',
+        'Lorem ipsum dolor sit amet consectetur. Euismod ultricies sed ipsum duis at arcu sit urna proin.  Erat feugiat diam pharetra nisl. .',
     },
-  }
+  },
+  {
+    videos: [{ src: '/video1.mp4', poster: '/poster1.jpg' }],
+    accordion: {
+      title: 'Lorem Ipsum dolor',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. A, vero quidem! Esse expedita, quam, et alias quidem dolores accusamus beatae ex nostrum qui nisi dolore ipsam adipisci, magnam fugiat praesentium.',
+    },
+  },
+  {
+    vimeos: [{ src: 'https://player.vimeo.com/video/76979871' }],
+    accordion: {
+      title: 'Amet consectetur',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. A, vero quidem! Esse expedita, quam.',
+    },
+  },
+  {
+    vimeos: [{ src: 'https://player.vimeo.com/video/76979871' }],
+    accordion: {
+      title: 'Tellus bibendum sapien',
+      description:
+        'Lorem ipsum dolor sit amet consectetur. Euismod ultricies sed ipsum duis at arcu sit urna proin. Erat feugiat diam pharetra nisl.',
+    },
+  },
+  {
+    footer_title: 'A friendly feminder',
+    footer_description:
+      'Alcohol will still probably affect your well-being and your sleep. A healthy breakfast and coffee should have you up and running by mid-morning.',
+  },
 ];
 
-function Playtime() {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [inView, setInView] = useState(false);
-  const sectionRef = useRef(null);
+const mediaSlides = slides.slice(0, Math.max(1, slides.length  + 2));
+const footer = slides[slides.length - 1];
 
+function useInViewport(ref) {
+  const [inView, setInView] = useState(false);
   useEffect(() => {
     const observer = new window.IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
-      { threshold: 0.3 }
+      { threshold: 0.10 }
     );
-    if (sectionRef.current) observer.observe(sectionRef.current);
+    if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
-  }, []);
+  }, [ref]);
+  return inView;
+}
 
-  const activeSlide = slides[activeIndex];
+function Playtime() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [openAccordion, setOpenAccordion] = useState(0);
+  const sectionRef = useRef(null);
+  const inView = useInViewport(sectionRef);
+  const intervalRef = useRef(null);
 
-  return (
-    <section className={`playtime-container${inView ? ' animate' : ''}`} ref={sectionRef}>
-      <div className="left-playtime">
-        {activeSlide?.image && (
-          <div className="image-box">
-            <img src={activeSlide.image} alt="Slide" />
-          </div>
+  useEffect(() => {
+    if (inView && mediaSlides.length > 0) {
+      intervalRef.current = setInterval(() => {
+        setActiveIndex((prev) => (prev + 1) % mediaSlides.length);
+        setOpenAccordion((prev) => (prev + 1) % mediaSlides.length);
+      }, 4000);
+    } else {
+      clearInterval(intervalRef.current);
+    }
+    return () => clearInterval(intervalRef.current);
+  }, [inView]);
+
+  useEffect(() => {
+    setOpenAccordion(activeIndex);
+  }, [activeIndex]);
+
+  const sectionTitle = mediaSlides[0]?.accordion?.title ?? '';
+
+  const renderMedia = (slide, idx) => {
+    const isActive = activeIndex === idx;
+    const primary = useMemo(() => {
+      if (slide?.image) return { type: 'image', value: slide.image };
+      if (slide?.videos?.[0]) return { type: 'video', value: slide.videos[0] };
+      if (slide?.vimeos?.[0]) return { type: 'vimeo', value: slide.vimeos[0] };
+      return null;
+    }, [slide]);
+
+    return (
+      <div
+        key={idx}
+        className={`slide${isActive ? ' active' : ''}`}
+        style={{ display: isActive ? 'block' : 'none' }}
+      >
+        {primary?.type === 'image' && (
+          <img src={primary.value} alt={slide?.accordion?.title ?? 'Slide'} />
         )}
-
-        {activeSlide?.videos?.map((vid, i) => (
+        {primary?.type === 'video' && (
           <video
-            key={i}
+            src={primary.value.src}
+            poster={primary.value.poster}
+            autoPlay={isActive && inView}
             controls
-            autoPlay={inView}
             muted={false}
-            width="100%"
-            height="180"
-            poster={vid.poster}
-            style={{ marginTop: 12, borderRadius: 10 }}
-          >
-            <source src={vid.src} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        ))}
-
-        {activeSlide?.vimeos?.map((vimeo, i) => (
+            playsInline
+            style={{ width: '100%' }}
+          />
+        )}
+        {primary?.type === 'vimeo' && (
           <iframe
-            key={i}
-            src={`${vimeo.src}?autoplay=${inView ? 1 : 0}&muted=0`}
+            src={`${primary.value.src}?autoplay=${isActive && inView ? 1 : 0}&muted=0`}
             width="100%"
-            height="180"
+            height="300"
             frameBorder="0"
             allow="autoplay; fullscreen"
             allowFullScreen
-            title={`Vimeo ${i}`}
-            style={{ marginTop: 12, borderRadius: 10, background: '#000' }}
+            title={slide?.accordion?.title ?? `Vimeo ${idx + 1}`}
+            style={{ background: '#000' }}
           />
-        ))}
+        )}
       </div>
+    );
+  };
 
-      <div className="right-playtime">
-        <h2
-          style={{
-            fontFamily: 'Inter, Arial, sans-serif',
-            fontWeight: 700,
-            color: '#1a2a4a',
-            fontStyle: 'normal',
-            fontSize: '2.2rem',
-            marginBottom: 12,
-            lineHeight: 1.1,
-          }}
-        >
-        </h2>
+  const handleAccordionClick = (idx) => {
+    setActiveIndex(idx);
+    setOpenAccordion(idx);
+  };
 
-        <div style={{ marginBottom: 16 }}>
-          <b>Lorem Ipsum</b>
-          <div
-            style={{
-              fontStyle: 'normal',
-              color: '#222',
-              fontWeight: 400,
-              fontSize: '1rem',
-              marginTop: 4,
-            }}
-          >
-            {activeSlide?.accordion?.description || 'No description available'}
+  return (
+    <section
+      ref={sectionRef}
+      className={`slider-accordion-section${inView ? ' animate' : ''}`}
+      aria-label="Playtime carousel"
+    >
+      <div className="content-wrapper">
+        <div className="slider">
+          {mediaSlides.map((slide, idx) => renderMedia(slide, idx))}
+        </div>
+
+        <div className="accordion-column">
+          <div className="section-title">
+            {sectionTitle?.includes("It's") ? sectionTitle.replace('.', ',') : sectionTitle}
+          </div>
+
+          <div className="accordion">
+            {mediaSlides.map((slide, idx) => (
+              <div
+                key={idx}
+                className={`accordion-item${openAccordion === idx ? ' open' : ''}`}
+              >
+                <div
+                  className="accordion-title"
+                  onClick={() => handleAccordionClick(idx)}
+                >
+                  {slide.accordion?.title ?? ``}
+                </div>
+                {openAccordion === idx && slide.accordion?.description && (
+                  <div className="accordion-desc">{slide.accordion.description}</div>
+                )}
+              </div>
+            ))}
+
+            <h5>{footer?.footer_title || 'No Footer Title'}</h5>
+            <div className="footer-note">
+              {footer?.footer_description || 'No footer description'}
+            </div>
           </div>
         </div>
-
-        <div className="accordion-list">
-          {activeSlide?.accordion?.items?.map((item, idx) => (
-            <div
-              key={idx}
-              className={`accordion-item${activeIndex === idx ? ' active' : ''}`}
-              style={{
-                color: activeIndex === idx ? '#1976d2' : (idx === 0 ? '#b7b7b7' : idx === 1 ? '#b7c59c' : '#cbe7e2'),
-                borderBottom: '1px solid #eee',
-                padding: '8px 0',
-                fontSize: '1.08rem',
-                fontStyle: 'normal',
-                cursor: 'pointer',
-                fontWeight: activeIndex === idx ? 600 : 400
-              }}
-              onClick={() => setActiveIndex(idx)}
-            >
-              {item}
-            </div>
-          ))}
-        </div>
-
-        <footer
-          className="accordion-footer"
-          style={{ marginTop: 24, fontFamily: 'Arial, Helvetica, sans-serif' }}
-        >
-          <span
-            style={{
-              fontWeight: 600,
-              color: '#1a2a4a',
-              fontStyle: 'italic',
-              fontSize: '1rem',
-            }}
-          >
-            {activeSlide?.accordion?.footertitle || 'No Footer Title'}
-          </span>
-          <br />
-          <span
-            style={{
-              fontSize: '0.95rem',
-              color: '#222',
-              fontStyle: 'normal',
-            }}
-          >
-            {activeSlide?.accordion?.footerdescription || 'No footer description'}
-          </span>
-        </footer>
       </div>
     </section>
   );

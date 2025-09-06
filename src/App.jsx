@@ -24,8 +24,11 @@ function App() {
           <Route path='/' element={<div className='mainpage'>This is Main Page</div>} />
           <Route path='/mealtime' element={<Mealtime />} />
           <Route path='/playboxes' element={<Playbox />}></Route>
-          <Route path='/playtime' element={<Playtime/>}></Route>
         </Routes>
+      </div>
+
+      <div class="section">
+        <Playtime/>
       </div>
     </>
   );

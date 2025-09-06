@@ -12,7 +12,14 @@
   opacity: 0;
   overflow-y: scroll;
 }
-
+.header
+{
+position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;}
 .main.show {
   transform: translateX(0);
   pointer-events: auto;
@@ -22,4 +29,8 @@
   transform: translateX(100vw);
   opacity: 0;
   pointer-events: none;
+}
+
+.section{
+  margin-top: 50rem;
 }
